@@ -33,7 +33,7 @@ exports.signUp_post = [
     
             const userCheck = await User.findOne( {username: req.body.username} ).exec();
             if (userCheck!==null) {
-              res.json("Username Taken")
+              res.json("Username Unavailable")
             }
 
             // Create a User object with escaped and trimmed data.
