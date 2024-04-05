@@ -31,6 +31,11 @@ exports.signUp_post = [
             // Extract the validation errors from a request.
             const errors = validationResult(req);
     
+            const userCheck = await User.findOne( {username: req.body.username} ).exec();
+            if (!userCheck.isEmpty()) {
+              res.json("Username Taken")
+            }
+
             // Create a User object with escaped and trimmed data.
             const user = new User({
             username: req.body.username,
