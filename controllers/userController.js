@@ -32,7 +32,7 @@ exports.signUp_post = [
             const errors = validationResult(req);
     
             const userCheck = await User.findOne( {username: req.body.username} ).exec();
-            if (userCheck===null) {
+            if (userCheck!==null) {
               res.json("Username Taken")
             }
 
