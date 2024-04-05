@@ -20,7 +20,7 @@ exports.signUp_post = [
       .trim()
       .isLength({ min: 1 })
       .escape(),
-    body("passwordConfirm", "Password confirmation must match")
+    body("confirmPassword", "Password confirmation must match")
       .custom((value, { req }) => {
         return value === req.body.password;
       }),
