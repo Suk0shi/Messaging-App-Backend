@@ -94,16 +94,17 @@ exports.addFriend = [
     .escape(),
   // Process request after validation and sanitization.
   asyncHandler(async (req, res, next) => {
-    let thisUser = null;
+    let findUser = null;
     jwt.verify(req.token, `${process.env.JWT_KEY}`,(err, authData) => {
       if(err) {
         res.json('Login required')
       } else {
-        thisUser = User.findOne( {_id: authData.user._id} ).exec();
+        findUser = authData.user;
       }
     })
     const errors = validationResult(req);
     
+    const thisUser = await User.findOne( {_id: findUser._id} ).exec();
     const addUser = await User.findOne( {username: req.body.username} ).exec();
     if(addUser===null) {
       res.json("User not found")
