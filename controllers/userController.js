@@ -99,7 +99,7 @@ exports.addFriend = [
       if(err) {
         res.json('Login required')
       } else {
-        thisUser = authData.user;
+        thisUser = User.findOne( {_id: authData.user._id} ).exec();
       }
     })
     const errors = validationResult(req);
